@@ -1,1 +1,44 @@
-<p>main-page works!</p>
+<section class="main-page">
+
+  <h1 class="main-page__header-text">Image to text convertor</h1>
+
+  <main class="main-page__main-container">
+    <form
+      class="main-page__form"
+      (submit)="onFormSubmit($event)"
+    >
+
+      <div class="main-page__form-input-container">
+        <input
+          class="main-page__form-input"
+          type="file"
+          accept="image/png, image/jpeg"
+          (change)="onFileSelected($event)"
+        >
+        <img *ngIf="previewUrl" [src]="previewUrl" alt="preview" class="main-page__preview">
+      </div>
+
+      <button type="submit">convert</button>
+    </form>
+
+    <article class="main-page__info-output" id="el">
+      <span *ngIf="loaderStatus" class="pi pi-spin pi-spinner"></span>
+
+      <span *ngIf="!loaderStatus">
+    {{ convertedInformation }}
+  </span>
+    </article>
+
+    <button
+      class="main-page__copy-btn"
+      type="button"
+      (click)="copyToClipboard()"
+    >
+      <i [class]="copied ? 'pi pi-check' : 'pi pi-clone'"></i>
+    </button>
+
+
+  </main>
+
+  <p-toast />
+</section>
